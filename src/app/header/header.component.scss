@@ -1,0 +1,28 @@
+header {
+  display: flex;
+  padding-inline: 2rem;
+  padding-block: 0.8rem;
+  background: linear-gradient(135deg, hwb(194 3% 92%), #172a31, #2c5364);
+  color: white;
+  font-size: x-large;
+  gap: 3rem;
+  align-items: center;
+  margin: 0 !important;
+}
+
+.title {
+  font-size: 1.5rem;
+}
+
+.flexer {
+  display: flex;
+  gap: 1rem;
+  li {
+    font-size: small;
+    cursor: pointer;
+    &:hover {
+      color: #f1c40f;
+      text-decoration: underline;
+    }
+  }
+}

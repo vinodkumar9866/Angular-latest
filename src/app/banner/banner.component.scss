@@ -1,0 +1,41 @@
+.custom-bg-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  gap: 4px;
+
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.4) 100%
+    ),
+    url("https://justxchange-1.s3.ap-south-1.amazonaws.com/uploads/istockphoto-1333039919-612x612.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 0.75rem;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 2rem 1rem;
+}
+
+.custom-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.custom-heading {
+  color: white;
+  font-size: 1.875rem; /* Tailwind equivalent of text-3xl */
+  font-weight: 900; /* font-black */
+  line-height: 1.25;
+  letter-spacing: -0.033em;
+}
+
+.custom-subheading {
+  color: white;
+  font-size: 1.2rem; /* text-base */
+  font-weight: 400; /* font-normal */
+  line-height: 1.5;
+}
