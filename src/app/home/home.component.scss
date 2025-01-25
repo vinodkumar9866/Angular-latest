@@ -2,3 +2,28 @@ flexer {
   display: flex;
   flex-direction: column;
 }
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  padding-top: 2rem;
+}
+
+.card {
+  display: flex;
+  max-width: 20rem;
+}
+
+.card-container {
+  margin: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+mat-form-field.small {
+  --mat-form-field-container-height: 30px;
+  --mat-form-field-container-vertical-padding: 4px;
+  --mat-form-field-font-color: red;
+}

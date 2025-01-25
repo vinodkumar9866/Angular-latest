@@ -1,13 +1,17 @@
 header {
   display: flex;
   padding-inline: 2rem;
-  padding-block: 0.8rem;
-  background: linear-gradient(135deg, hwb(194 3% 92%), #172a31, #2c5364);
+  background: linear-gradient(145deg, hwb(249 3% 92%), #172a31, #0a1317);
   color: white;
   font-size: x-large;
   gap: 3rem;
   align-items: center;
   margin: 0 !important;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  height: 4rem;
 }
 
 .title {
@@ -17,12 +21,38 @@ header {
 .flexer {
   display: flex;
   gap: 1rem;
+  align-items: center;
+  list-style-type: none;
   li {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
     font-size: small;
     cursor: pointer;
     &:hover {
-      color: #f1c40f;
-      text-decoration: underline;
+      font-weight: 900;
+      // text-decoration: underline;
     }
   }
+}
+
+.mat-icon-custom {
+  font-size: 1rem !important;
+  display: flex;
+  align-items: center;
+  margin-right: -0.5rem;
+}
+
+.flexer-2 {
+  display: flex;
+  margin-left: auto;
+}
+
+nav {
+  width: 80%;
+}
+
+mat-form-field.small {
+  --mat-form-field-container-height: 30px;
+  --mat-form-field-container-vertical-padding: 4px;
 }

@@ -1,48 +1,27 @@
-<app-banner
-  (btnClick)="handleBannerClick($event)"
-  [title]="bannerTitle"
-  [subTitle]="bannerSubTitle"
-/>
-
-<main class="flexer">
-  <div>
-    <mat-form-field>
-      <mat-label>Enter Banner Title</mat-label>
-      <input type="text" matInput placeholder="" [(ngModel)]="bannerTitle" />
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>Enter Banner Sub Title</mat-label>
+<app-banner [title]="bannerTitle" [subTitle]="bannerSubTitle" />
+<div>
+  <div style="display: flex; gap: 1rem">
+    <h2>Products</h2>
+    <mat-form-field
+      style="padding-top: 2rem"
+      class="small"
+      appearance="outline"
+      #searchField
+    >
       <input
-        type="text"
+        placeholder="Search products..."
         matInput
-        placeholder=""
-        [value]="subText"
-        (input)="updateBannerSubTitle($event)"
-        [disabled]="!enableEdit"
+        type="text"
+        [(ngModel)]="searchTerm"
       />
+      <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
-    <button
-      mat-mini-fab
-      color="primary"
-      aria-label="Example icon button with a menu icon"
-      style="margin: 0 1rem"
-      (click)="enableEdit = true"
-    >
-      <mat-icon>edit</mat-icon>
-    </button>
-    <button
-      (click)="subText = ''"
-      mat-mini-fab
-      color="primary"
-      aria-label="Example icon button with a menu icon"
-    >
-      <mat-icon>clear</mat-icon>
-    </button>
   </div>
-  <button (click)="handleSubmit()" mat-flat-button color="primary">
-    Submit
-  </button>
-</main>
-<p>{{ bannerText }}</p>
+  <!-- <div *ngIf="filteredProducts.length > 0"> -->
+  <div class="card-container" #cardContainer>
+    <div *ngFor="let product of filteredProducts">
+      <app-card class="card" [product]="product" />
+    </div>
+  </div>
+  <!-- </div> -->
+</div>

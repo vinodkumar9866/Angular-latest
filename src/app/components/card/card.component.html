@@ -1,0 +1,31 @@
+<div>
+  <mat-card appearance="outlined">
+    <h5 style="padding: 1rem">{{ product.title }}</h5>
+    <img mat-card-image [src]="product.image[0]" />
+    <mat-card-content>
+      <p>{{ product.description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <!-- <button mat-button>LIKE</button> -->
+      <button
+        mat-button
+        (click)="isProductInCart(product) ? '' : addToCart(product)"
+      >
+        {{ isProductInCart(product) ? "Already in cart" : "ADD TO CART" }}
+      </button>
+      <button
+        *ngIf="isProductInCart(product)"
+        mat-button
+        (click)="removeFromCart(product)"
+        style="
+          color: white;
+          background-color: rgb(132, 59, 59);
+          font-size: 0.8rem;
+          margin-left: 1rem;
+        "
+      >
+        REMOVE
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

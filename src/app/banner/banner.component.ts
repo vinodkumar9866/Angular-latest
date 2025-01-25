@@ -20,9 +20,4 @@ export class BannerComponent {
   // subTitle = input.required();
   @Input({ required: true }) title!: string;
   @Input() subTitle!: string;
-  @Output() btnClick = new EventEmitter<string>();
-
-  onBannerClick = () => {
-    this.btnClick.emit('Banner clicked');
-  };
 }

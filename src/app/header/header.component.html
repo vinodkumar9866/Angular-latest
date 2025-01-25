@@ -5,6 +5,31 @@
       <li>Add product</li>
       <li>About</li>
       <li>Contact</li>
+      <li>
+        <span>Cart</span>
+        <mat-icon class="mat-icon-custom">shopping_cart </mat-icon>
+        <span>({{ cartItemsCount() }})</span>
+      </li>
+      <li style="padding-top: 1rem">
+        <!-- <mat-form-field class="small" appearance="outline">
+          <mat-label>Search</mat-label>
+          <input matInput type="text" />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field> -->
+        <!-- <mat-form-field class="small" appearance="outline">
+          <input
+            placeholder="Search products..."
+            style="color: white"
+            matInput
+            type="text"
+            [(ngModel)]="searchTerm"
+          />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field> -->
+      </li>
+      <!-- <li class="flexer-2">
+        <mat-icon>account_circle </mat-icon>
+      </li> -->
     </ul>
   </nav>
 </header>

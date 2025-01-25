@@ -1,0 +1,19 @@
+img {
+  width: 250px;
+  height: 250px;
+  padding: 1rem;
+}
+
+p {
+  overflow: hidden; /* Ensures the overflow text is hidden */
+  display: -webkit-box; /* Creates a flexible box layout */
+  -webkit-box-orient: vertical; /* Defines the box orientation as vertical */
+  -webkit-line-clamp: 3; /* Limits text to 3 lines */
+  text-overflow: ellipsis; /* Adds ellipses for truncated text */
+  line-clamp: 3;
+}
+
+mat-card {
+  display: flex;
+  align-items: center;
+}
