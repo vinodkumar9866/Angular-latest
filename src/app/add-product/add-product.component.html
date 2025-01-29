@@ -1,0 +1,123 @@
+<div class="add-product-form-container">
+  <form [formGroup]="productForm">
+    <mat-card-header style="padding-bottom: 1rem">
+      <mat-card-title>{{
+        editForm ? "Edit Product" : "Add Product"
+      }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- Product Name -->
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Product Name</mat-label>
+        <input
+          matInput
+          formControlName="productName"
+          placeholder="Enter product name"
+        />
+        <mat-error
+          *ngIf="productForm.controls['productName'].hasError('required')"
+        >
+          Product Name is required
+        </mat-error>
+        <mat-error
+          *ngIf="productForm.controls['productName'].hasError('minlength')"
+        >
+          Must be at least 3 characters long
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Description -->
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          placeholder="Enter product description"
+          rows="4"
+        ></textarea>
+        <mat-error
+          *ngIf="
+            productForm.controls['description'].hasError('required') &&
+            productForm.controls['description'].touched
+          "
+        >
+          Description is required
+        </mat-error>
+        <mat-error
+          *ngIf="
+            productForm.controls['description'].hasError('minlength') &&
+            productForm.controls['description'].touched
+          "
+        >
+          Must be at least 5 characters long
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Price -->
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" placeholder="Enter price" />
+        <mat-error *ngIf="productForm.controls['price'].hasError('required')">
+          Price is required
+        </mat-error>
+        <mat-error *ngIf="productForm.controls['price'].hasError('min')">
+          Price must be greater than 0
+        </mat-error>
+        <mat-error *ngIf="productForm.controls['price'].hasError('pattern')">
+          Price must be a number
+        </mat-error>
+      </mat-form-field>
+
+      <div class="file-upload-container">
+        <button
+          mat-raised-button
+          style="
+            background-color: #3d77ba;
+            color: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+          "
+          (click)="triggerFileInput()"
+        >
+          Upload Image
+        </button>
+        <p style="font-size: 0.8rem">
+          {{
+    uploadedImage?.name || (data.product?.images?.[0] || '')
+          }}
+        </p>
+
+        <!-- Hidden file input -->
+        <input
+          #fileInput
+          id="fileInput"
+          type="file"
+          (change)="onFileSelect($event)"
+          class="file-input"
+          hidden
+        />
+        <mat-error *ngIf="!uploadedImage && !imageError && !data.product">
+          *Image is required.
+        </mat-error>
+        <mat-error *ngIf="imageError">
+          {{ imageError }}
+        </mat-error>
+      </div>
+    </mat-card-content>
+    <mat-card-actions style="display: flex; gap: 0.5rem; margin-left: auto">
+      <button mat-button type="reset" (click)="onReset()">Cancel</button>
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="
+          productForm.invalid ||
+          (!uploadedImage && !data.product) ||
+          updateDisabled
+        "
+        (click)="onSubmit()"
+      >
+        {{ editForm ? "Update" : "Submit" }}
+      </button>
+    </mat-card-actions>
+  </form>
+</div>

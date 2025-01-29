@@ -1,0 +1,61 @@
+.table-card {
+  border-radius: 1rem;
+  background-color: white !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  padding-top: 1rem;
+}
+
+table {
+  overflow-y: auto;
+  height: 30rem;
+  display: block;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+mat-header-row,
+mat-header-cell {
+  position: sticky;
+  top: 0;
+  background-color: #fff; /* Optional: gives the header a white background */
+  z-index: 1; /* Ensures the header stays on top */
+}
+
+th {
+  font-weight: bold;
+  text-align: left;
+  padding: 1rem;
+  background-color: white !important;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid white !important;
+}
+
+.mat-elevation-z4 {
+  border-radius: 0.5rem;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.sticky-paginator {
+  width: 100%;
+  background: white;
+  padding: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .table-card {
+    padding-top: 0;
+  }
+}
+
+.custom-button:focus {
+  outline: 3px solid #ffcc00; // Yellow border when focused
+  outline-offset: 2px;
+}

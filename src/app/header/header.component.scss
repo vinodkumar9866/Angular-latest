@@ -16,6 +16,9 @@ header {
 
 .title {
   font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .flexer {
@@ -49,10 +52,24 @@ header {
 }
 
 nav {
-  width: 80%;
+  width: 100%;
 }
 
 mat-form-field.small {
   --mat-form-field-container-height: 30px;
   --mat-form-field-container-vertical-padding: 4px;
+}
+
+.menu-button {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .menu-button {
+    display: flex;
+    margin-left: 25%;
+  }
+  nav {
+    display: none;
+  }
 }

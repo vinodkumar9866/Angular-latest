@@ -17,13 +17,18 @@ h2 {
 .card-container {
   margin: 1rem;
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: baseline;
 }
 
 mat-form-field.small {
   --mat-form-field-container-height: 30px;
   --mat-form-field-container-vertical-padding: 4px;
-  --mat-form-field-font-color: red;
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    justify-content: center;
+  }
 }

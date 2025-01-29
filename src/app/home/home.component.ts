@@ -21,10 +21,10 @@ import { IProduct } from '../interfaces/product';
 import { ProductService } from '../services/product.service';
 import { CommonModule } from '@angular/common';
 import { interval, Subscription } from 'rxjs';
+import { normalizeImages } from '../utils/imageUtil';
 @Component({
   selector: 'app-home',
   imports: [
-    BannerComponent,
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -37,35 +37,16 @@ import { interval, Subscription } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit, DoCheck, OnDestroy {
-  bannerTitle = 'Welcome to JustXchange';
-  bannerSubTitle = 'Buy, sell, and exchange anything on your campus';
+export class HomeComponent implements OnInit, DoCheck {
+  bannerTitle = 'Welcome to Online Shopping';
+  bannerSubTitle = 'Buy, sell, and exchange anything';
   products: IProduct[] = [];
   searchTerm = '';
   filteredProducts: IProduct[] = [];
-
-  @ViewChild('searchField') searchField!: HTMLElement;
-  // Executed once after the view (and child views) of the component has been fully initialized
-  ngAfterViewInit() {
-    console.log(
-      'ngAfterViewInit: The view has been initialized.',
-      this.searchField
-    );
-  }
-
-  // Executed after every change detection cycle when the view (and child views) has been checked
-  ngAfterViewChecked() {
-    console.log(
-      'ngAfterViewChecked: The view has been checked.',
-      this.searchField
-    );
-  }
-
-  elapsedTime = 0;
-  private timerSubscription: Subscription | null = null;
-
+  prevSearch = '';
   ngDoCheck() {
-    if (this.searchTerm) {
+    if (this.searchTerm !== this.prevSearch) {
+      this.prevSearch = this.searchTerm;
       this.filteredProducts = this.products.filter((product) => {
         return product.title
           .toLowerCase()
@@ -74,28 +55,26 @@ export class HomeComponent implements OnInit, DoCheck, OnDestroy {
     } else {
       this.products = [...this.products];
     }
-    console.log(
-      `ngDoCheck triggered: Current search term is "${this.searchTerm}"`
-    );
   }
 
   ngOnInit() {
-    console.log('ngOnInit triggered : For Calling API');
-    this.productService.getProducts().subscribe((products) => {
-      this.products = products;
-      this.filteredProducts = products;
+    this.loadProducts();
+
+    // Listen for updates and refresh products
+    this.productService.onProductsUpdated().subscribe(() => {
+      this.loadProducts();
     });
-    // this.timerSubscription = interval(1000).subscribe(() => {
-    //   this.elapsedTime++;
-    //   console.log(`Elapsed time: ${this.elapsedTime}`);
-    // });
   }
 
-  ngOnDestroy() {
-    console.log('ngOnDestroy triggered');
-    if (this.timerSubscription) {
-      this.timerSubscription.unsubscribe();
-    }
+  private loadProducts() {
+    this.productService.getProducts().subscribe((products) => {
+      this.products = products.map((product) => ({
+        ...product,
+        images: normalizeImages(product.images),
+      }));
+
+      this.filteredProducts = this.products;
+    });
   }
 
   constructor(private productService: ProductService) {}

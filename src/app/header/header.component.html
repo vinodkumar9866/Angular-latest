@@ -1,35 +1,38 @@
 <header>
-  <h3 class="title">{{ title }}</h3>
+  <h3 class="title flex justify-center gap-2">
+    {{ title }}
+    <mat-icon style="font-size: 1.5rem">shopping_basket </mat-icon>
+  </h3>
   <nav>
     <ul class="flexer">
-      <li>Add product</li>
-      <li>About</li>
-      <li>Contact</li>
-      <li>
+      <li routerLink="/home">Home</li>
+      <li routerLink="/admin">Admin</li>
+      <li routerLink="/cart">
         <span>Cart</span>
         <mat-icon class="mat-icon-custom">shopping_cart </mat-icon>
         <span>({{ cartItemsCount() }})</span>
       </li>
-      <li style="padding-top: 1rem">
-        <!-- <mat-form-field class="small" appearance="outline">
-          <mat-label>Search</mat-label>
-          <input matInput type="text" />
-          <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field> -->
-        <!-- <mat-form-field class="small" appearance="outline">
-          <input
-            placeholder="Search products..."
-            style="color: white"
-            matInput
-            type="text"
-            [(ngModel)]="searchTerm"
-          />
-          <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field> -->
-      </li>
-      <!-- <li class="flexer-2">
-        <mat-icon>account_circle </mat-icon>
-      </li> -->
+      <li style="padding-top: 1rem"></li>
     </ul>
   </nav>
+  <!-- Mobile Navigation Menu -->
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+    class="menu-button"
+    matTooltip="Open Menu"
+    matTooltipPosition="below"
+    aria-label="Open mobile menu"
+    tabindex="0"
+  >
+    <mat-icon style="color: white">menu</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu" matMenuPositionX="before">
+    <button mat-menu-item routerLink="/home" tabindex="0">Home</button>
+    <button mat-menu-item routerLink="/admin" tabindex="0">Admin</button>
+    <button mat-menu-item routerLink="/cart" tabindex="0">
+      Cart <mat-icon>shopping_cart</mat-icon> ({{ cartItemsCount() }})
+    </button>
+  </mat-menu>
 </header>

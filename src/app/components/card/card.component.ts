@@ -13,14 +13,26 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { IProduct } from '../../interfaces/product';
 import { CartStoreService } from '../../store/cart-store.service';
+import { FormatPricePipe } from '../../pipes/format-price.pipe';
+import { HilighterDirective } from '../../directives/hilighter.directive';
+import { RouterModule } from '@angular/router';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
-  imports: [MatButtonModule, MatCardModule, CommonModule],
+  imports: [
+    MatButtonModule,
+    MatCardModule,
+    CommonModule,
+    FormatPricePipe,
+    HilighterDirective,
+    RouterModule,
+    MatTooltipModule,
+  ],
 })
-export class CardComponent implements OnChanges, OnDestroy {
+export class CardComponent {
   @Input() product: IProduct = {} as IProduct;
   cartItems = computed(() => this.cartState.getCartItems());
 
@@ -35,15 +47,5 @@ export class CardComponent implements OnChanges, OnDestroy {
 
   isProductInCart(product: IProduct): boolean {
     return this.cartItems().some((item) => item.id === product.id);
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['product']) {
-      console.log('ngOnChanges triggered: product items changed');
-    }
-  }
-
-  ngOnDestroy() {
-    console.log('ngOnDestroy triggered');
   }
 }

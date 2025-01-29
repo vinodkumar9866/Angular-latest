@@ -1,7 +1,15 @@
 <div>
-  <mat-card appearance="outlined">
-    <h5 style="padding: 1rem">{{ product.title }}</h5>
-    <img mat-card-image [src]="product.image[0]" />
+  <mat-card appHilighter appearance="outlined">
+    <h5 style="padding: 1rem; display: flex; gap: 0.5rem">
+      <span
+        class="product-title"
+        [matTooltip]="product.title | titlecase"
+        matTooltipPosition="above"
+        >{{ product.title | titlecase }}</span
+      >
+      <span>( {{ product.price | formatPrice }} )</span>
+    </h5>
+    <img mat-card-image [src]="product.images[0]" />
     <mat-card-content>
       <p>{{ product.description }}</p>
     </mat-card-content>
@@ -10,8 +18,9 @@
       <button
         mat-button
         (click)="isProductInCart(product) ? '' : addToCart(product)"
+        [routerLink]="isProductInCart(product) ? '/cart' : ''"
       >
-        {{ isProductInCart(product) ? "Already in cart" : "ADD TO CART" }}
+        {{ isProductInCart(product) ? "Go to cart" : "ADD TO CART" }}
       </button>
       <button
         *ngIf="isProductInCart(product)"

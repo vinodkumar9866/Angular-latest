@@ -3,23 +3,34 @@ import {
   ContentChild,
   effect,
   ElementRef,
+  EventEmitter,
   OnInit,
+  Output,
   signal,
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CartStoreService } from '../store/cart-store.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormControl } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-header',
-  imports: [MatIconModule, MatFormFieldModule, MatInputModule],
+  imports: [
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    RouterModule,
+    MatMenuModule,
+    MatButtonModule,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  title = 'JustXchange';
+  title = 'Shopping';
   searchTerm = '';
   searchEnable = false;
   cartItemsCount = signal(0);
@@ -27,23 +38,6 @@ export class HeaderComponent {
     effect(() => {
       this.cartItemsCount.set(this.cartState.getCartItemCount());
     });
-  }
-
-  @ContentChild('projected') projectedContent!: ElementRef;
-  // Triggered once after ng-content or viewChild content is initialized
-  ngAfterContentInit() {
-    console.log(
-      'ngAfterContentInit: The content has been initialized.',
-      this.projectedContent?.nativeElement?.innerHTML
-    );
-  }
-
-  // Triggered every time the content or its children change
-  ngAfterContentChecked() {
-    console.log(
-      'ngAfterContentChecked: The content has been checked.',
-      this.projectedContent?.nativeElement?.innerHTML
-    );
   }
 
   onSearch = () => {

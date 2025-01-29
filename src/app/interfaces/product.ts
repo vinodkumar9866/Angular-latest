@@ -1,14 +1,26 @@
-export interface IRating {
-  rate: number;
-  count: number;
-}
-
 export interface IProduct {
   id: number;
   title: string;
   price: number;
   description: string;
-  category: string;
+  images: string[];
+  creationAt: string; // ISO date string
+  updatedAt: string; // ISO date string
+  category: ICategory;
+}
+
+export interface ICategory {
+  id: number;
+  name: string;
   image: string;
-  rating: IRating;
+  creationAt: string; // ISO date string
+  updatedAt: string; // ISO date string
+}
+
+export interface IAddProduct {
+  title: string;
+  description: string;
+  price: number;
+  categoryId: number;
+  images: string[];
 }

@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content>
+  <!-- Render the form or dynamic content here -->
+  <ng-container *ngIf="data.component">
+    <ng-container *ngComponentOutlet="data.component"></ng-container>
+  </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onClose(false)">
+    {{ data.cancelText || "Cancel" }}
+  </button>
+  <button mat-raised-button color="primary" (click)="onClose(true)">
+    {{ data.confirmText || "Confirm" }}
+  </button>
+</mat-dialog-actions>

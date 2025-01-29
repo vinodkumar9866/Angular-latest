@@ -3,14 +3,24 @@ img {
   height: 250px;
   padding: 1rem;
 }
+.product-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 6rem;
+  display: block;
+}
 
 p {
-  overflow: hidden; /* Ensures the overflow text is hidden */
-  display: -webkit-box; /* Creates a flexible box layout */
-  -webkit-box-orient: vertical; /* Defines the box orientation as vertical */
-  -webkit-line-clamp: 3; /* Limits text to 3 lines */
-  text-overflow: ellipsis; /* Adds ellipses for truncated text */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
   line-clamp: 3;
+  width: 15rem;
+  height: 3.5rem;
+  margin: 0.5rem 0;
 }
 
 mat-card {

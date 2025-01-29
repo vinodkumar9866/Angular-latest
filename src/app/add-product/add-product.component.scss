@@ -1,0 +1,47 @@
+.add-product-form-container {
+  max-width: 600px;
+  padding: 1.5 rem;
+}
+.full-width {
+  width: 100%;
+}
+
+mat-form-field.input-field {
+  --mat-form-field-container-height: 10px;
+}
+
+mat-card {
+  padding: 1rem;
+  gap: 1rem;
+}
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+mat-error {
+  font-size: 0.7rem;
+  color: #f44336;
+}
+mat-card {
+  background-color: transparent;
+}
+
+.file-upload-container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+form {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 1.5rem;
+  gap: 1rem;
+}
