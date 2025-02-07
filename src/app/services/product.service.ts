@@ -16,7 +16,7 @@ export class ProductService {
     `https://api.escuelajs.co/api/v1/products/${id}`;
 
   // BehaviorSubject to notify product updates
-  private productsUpdated = new BehaviorSubject<void>(undefined);
+  private productsUpdated = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {}
 
@@ -27,7 +27,7 @@ export class ProductService {
 
   addProduct(product: IAddProduct): Observable<any> {
     return this.http.post<IAddProduct>(this.addProductApiUrl, product).pipe(
-      tap(() => this.productsUpdated.next()) // Notify subscribers
+      tap(() => this.productsUpdated.next(true)) // Notify subscribers
     );
   }
 
@@ -35,14 +35,14 @@ export class ProductService {
   deleteProduct(id: number): Observable<void> {
     return this.http
       .delete<void>(this.deleteProductApiUrl(id))
-      .pipe(tap(() => this.productsUpdated.next()));
+      .pipe(tap(() => this.productsUpdated.next(true)));
   }
 
   // Update Product
   updateProduct(id: number, product: any): Observable<IProduct> {
     return this.http
       .put<IProduct>(this.updateProductApiUrl(id), product)
-      .pipe(tap(() => this.productsUpdated.next()));
+      .pipe(tap(() => this.productsUpdated.next(true)));
   }
 
   // Upload file to the API
@@ -56,7 +56,7 @@ export class ProductService {
   }
 
   // Expose the BehaviorSubject as an observable
-  onProductsUpdated(): Observable<void> {
+  onProductsUpdated(): Observable<boolean> {
     return this.productsUpdated.asObservable();
   }
 

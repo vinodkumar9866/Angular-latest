@@ -46,6 +46,8 @@ export class CardComponent {
   }
 
   isProductInCart(product: IProduct): boolean {
-    return this.cartItems().some((item) => item.id === product.id);
+    return this.cartItems().length
+      ? this.cartItems().some((item) => item.id === product.id)
+      : false;
   }
 }

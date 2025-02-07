@@ -1,15 +1,4 @@
-import {
-  Component,
-  ContentChild,
-  DoCheck,
-  ElementRef,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
-import { BannerComponent } from '../banner/banner.component';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -20,7 +9,6 @@ import { CardComponent } from '../components/card/card.component';
 import { IProduct } from '../interfaces/product';
 import { ProductService } from '../services/product.service';
 import { CommonModule } from '@angular/common';
-import { interval, Subscription } from 'rxjs';
 import { normalizeImages } from '../utils/imageUtil';
 @Component({
   selector: 'app-home',
@@ -47,13 +35,9 @@ export class HomeComponent implements OnInit, DoCheck {
   ngDoCheck() {
     if (this.searchTerm !== this.prevSearch) {
       this.prevSearch = this.searchTerm;
-      this.filteredProducts = this.products.filter((product) => {
-        return product.title
-          .toLowerCase()
-          .includes(this.searchTerm.toLowerCase());
-      });
-    } else {
-      this.products = [...this.products];
+      this.filteredProducts = this.products.filter((product) =>
+        product.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
     }
   }
 
@@ -66,7 +50,7 @@ export class HomeComponent implements OnInit, DoCheck {
     });
   }
 
-  private loadProducts() {
+  public loadProducts() {
     this.productService.getProducts().subscribe((products) => {
       this.products = products.map((product) => ({
         ...product,
