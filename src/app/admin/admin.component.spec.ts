@@ -8,6 +8,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IProduct } from '../interfaces/product';
+import { AddProductComponent } from '../add-product/add-product.component';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 // Mock Data
 const mockProducts: IProduct[] = [
@@ -76,6 +78,7 @@ describe('AdminComponent', () => {
         MatSortModule,
         BrowserAnimationsModule,
         AdminComponent,
+        AddProductComponent,
       ],
       providers: [
         { provide: ProductService, useClass: MockProductService },
@@ -113,8 +116,25 @@ describe('AdminComponent', () => {
     expect(dialog.open).toHaveBeenCalled();
   });
 
+  it('should open dialog when editing product', () => {
+    const mockProduct = mockProducts[0];
+    component.editProduct(mockProduct);
+    expect(dialog.open).toHaveBeenCalledWith(AddProductComponent, {
+      width: '500px',
+      disableClose: true,
+      autoFocus: true,
+      data: {
+        product: mockProduct,
+      },
+    });
+  });
+
   it('should delete a product', () => {
-    component.deleteProduct(1);
+    const mockMenuTrigger = jasmine.createSpyObj('MatMenuTrigger', [
+      'closeMenu',
+    ]);
+    const mockEvent = new Event('click');
+    component.deleteProduct(1, mockMenuTrigger, mockEvent);
     expect(productService.deleteProduct).toHaveBeenCalledWith(1);
   });
 });

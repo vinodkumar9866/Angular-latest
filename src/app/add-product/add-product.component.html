@@ -112,11 +112,15 @@
         [disabled]="
           productForm.invalid ||
           (!uploadedImage && !data.product) ||
-          updateDisabled
+          updateDisabled ||
+          isLoading
         "
         (click)="onSubmit()"
+        style="width: 5rem"
       >
-        {{ editForm ? "Update" : "Submit" }}
+        <mat-spinner *ngIf="isLoading" [diameter]="20"></mat-spinner>
+
+        <span *ngIf="!isLoading">{{ editForm ? "Update" : "Submit" }}</span>
       </button>
     </mat-card-actions>
   </form>

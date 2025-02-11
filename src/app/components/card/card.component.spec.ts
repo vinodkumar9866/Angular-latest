@@ -10,7 +10,7 @@ import { provideRouter } from '@angular/router';
 import { HilighterDirective } from '../../directives/hilighter.directive';
 import { FormatPricePipe } from '../../pipes/format-price.pipe';
 import { of } from 'rxjs';
-import { NO_ERRORS_SCHEMA, signal } from '@angular/core';
+import { signal } from '@angular/core';
 
 // Mock Data
 const mockProducts: IProduct[] = [
@@ -76,7 +76,6 @@ describe('CardComponent', () => {
         { provide: CartStoreService, useClass: MockCartStoreService },
         provideRouter([]),
       ],
-      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CardComponent);

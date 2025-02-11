@@ -49,6 +49,25 @@ tr:last-child td {
   padding: 0.5rem 0;
 }
 
+.menu-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ensures full width */
+}
+
+.menu-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Ensures centering inside the button */
+}
+
+.menu-text {
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 768px) {
   .table-card {
     padding-top: 0;

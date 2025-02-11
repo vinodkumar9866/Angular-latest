@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ProductService } from '../services/product.service';
 import { IAddProduct, IProduct } from '../interfaces/product';
 import { firstValueFrom } from 'rxjs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'add-product',
@@ -28,6 +29,7 @@ import { firstValueFrom } from 'rxjs';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class AddProductComponent implements OnInit, DoCheck {
@@ -37,6 +39,7 @@ export class AddProductComponent implements OnInit, DoCheck {
   updateDisabled = true;
   imageError: string | null = null;
   uploadedImage: File | null = null;
+  isLoading = false;
   ngOnInit(): void {
     console.log(this.data);
   }
@@ -114,7 +117,7 @@ export class AddProductComponent implements OnInit, DoCheck {
   async onSubmit() {
     if (this.productForm.valid) {
       const productData = this.productForm.value;
-
+      this.isLoading = true;
       try {
         //image upload
         let imageResponse: { location: string } | undefined;
@@ -147,7 +150,7 @@ export class AddProductComponent implements OnInit, DoCheck {
             : this.productService.addProduct(product)
         );
         console.log('Product added successfully:', addProductResponse);
-
+        this.isLoading = false;
         // Close the dialog and reset the form
         this.dialogRef.close(true);
         this.productForm.reset();

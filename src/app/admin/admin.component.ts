@@ -7,7 +7,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProductComponent } from '../add-product/add-product.component';
@@ -15,6 +15,7 @@ import { DateOnlyPipe } from '../pipes/date-format.pipe';
 import { FormatPricePipe } from '../pipes/format-price.pipe';
 import { normalizeImages } from '../utils/imageUtil';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-admin',
@@ -30,6 +31,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     DateOnlyPipe,
     FormatPricePipe,
     MatTooltipModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
@@ -42,6 +44,7 @@ export class AdminComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  isLoading = false;
   constructor(
     private productsService: ProductService,
     private dialog: MatDialog
@@ -93,11 +96,16 @@ export class AdminComponent implements OnInit {
     this.openAddProductDialog(product);
   }
 
-  deleteProduct(productId: number): void {
+  deleteProduct(productId: number, menu: MatMenuTrigger, event: Event): void {
+    event.stopPropagation();
+    this.isLoading = true;
     // Add delete logic here
     console.log('Deleting product with ID:', productId);
-    this.productsService
-      .deleteProduct(productId)
-      .subscribe((res) => console.log(res));
+    this.productsService.deleteProduct(productId).subscribe((res) => {
+      if (res as unknown as boolean) {
+        menu.closeMenu();
+        this.isLoading = false;
+      }
+    });
   }
 }

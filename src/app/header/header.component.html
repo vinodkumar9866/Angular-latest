@@ -12,7 +12,10 @@
         <mat-icon class="mat-icon-custom">shopping_cart </mat-icon>
         <span>({{ cartItemsCount() }})</span>
       </li>
-      <li style="padding-top: 1rem"></li>
+      <li *ngIf="isAuthenticated" (click)="logout()">
+        <span>Log out</span>
+        <mat-icon class="mat-icon-custom">logout</mat-icon>
+      </li>
     </ul>
   </nav>
   <!-- Mobile Navigation Menu -->

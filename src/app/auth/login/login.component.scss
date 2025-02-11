@@ -1,0 +1,36 @@
+.login-form-container {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+mat-card {
+  display: flex;
+  gap: 2rem;
+  background-color: transparent;
+}
+
+mat-error {
+  font-size: 0.7rem;
+  color: #f44336;
+}
+mat-card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+mat-card-header {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
